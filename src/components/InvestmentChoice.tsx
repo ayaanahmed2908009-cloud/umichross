@@ -7,18 +7,18 @@ const paths = [
   {
     id: 'installations',
     title: 'Fund installations',
-    description: 'Continue the installation work we already do.',
+    description: 'Support individual households through our existing work.',
     road: 'M500 24V76C500 155 250 138 250 236',
     response: 'You’d fund installations.',
-    reflection: 'You’d continue the work already under way. I chose to explore Project Water: a new pumping and filtration system whose impact is still to be seen.',
+    reflection: 'You’d continue supporting households through our existing work. I chose to explore Project Water because of its potential to reach a whole village. It still needs to be built and tested.',
   },
   {
     id: 'system',
     title: 'Develop a new system',
-    description: 'Explore solar-powered pumping and filtration.',
+    description: 'Explore solar-powered pumping and filtration for a village.',
     road: 'M500 24V76C500 155 750 138 750 236',
     response: 'That’s the path I chose.',
-    reflection: 'I wanted to use solar energy in a different way to help more people. I’m still waiting to see if that risk will pay off.',
+    reflection: 'The possibility of reaching a whole village made it worth exploring to me. The system is intended for around 200 people. I’m still waiting to see if that risk will pay off.',
   },
 ] as const;
 

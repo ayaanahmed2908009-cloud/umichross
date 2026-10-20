@@ -51,7 +51,7 @@ export default function ProjectWater() {
           <p className="chapter-eyebrow">An independent idea. A shared commitment.</p>
           <h2 id="introduction-title">PROJECT<br/>WATER.</h2>
           <p className="chapter-lead">Could solar energy help a rural community access filtered water more reliably?</p>
-          <p className="chapter-description">Through SolarPak, I developed an original system to pump, filter and store water before it reaches community taps. I made an animation to explain the idea to a six-member council. All six approved the proposal.</p>
+          <p className="chapter-description">As CEO of SolarPak, I oversee our installation efforts. Project Water is my proposal to use solar energy to pump, filter and store water for a rural community.</p>
           <p className="chapter-status">An approved concept. Implementation is still planned.</p>
         </div>
       </StoryChapter>
@@ -93,8 +93,9 @@ export default function ProjectWater() {
         <p className="chapter-eyebrow">The decision</p>
         <h2 id="communication-title">Choosing where<br/>to invest.</h2>
         <div className="chapter-prose">
-          <p>I had to decide whether to continue funding installations as usual or invest in a different way to use solar energy to help more people.</p>
-          <p>I chose to explore Project Water: a proposed system that brings pumping and filtration together. I made an animation to help SolarPak’s council understand the idea and decide whether to support it.</p>
+          <p>I had to decide whether to keep funding installations for individual households or invest in developing a shared water system.</p>
+          <p>I chose to explore Project Water because it could reach a whole village of around 200 people. That potential made it worth pursuing to me, even though it still needs to be built and tested.</p>
+          <p>I made a 3D design and an animation to explain the pumping and filtration proposal to SolarPak’s council and ask for their support.</p>
         </div>
       </section>
 
@@ -106,11 +107,11 @@ export default function ProjectWater() {
         <p className="chapter-eyebrow">Earning support</p>
         <div className="outcome-intro">
           <h2 id="outcome-title">From concept<br/>to commitment.</h2>
-          <p>The council unanimously approved Project Water’s proposed solar-powered pumping and filtration system. What began as an independent exploration became a proposal the organisation believed was worth pursuing.</p>
+          <p>I presented my design and animation to SolarPak’s six-member council. All six approved the proposed solar-powered pumping and filtration system.</p>
         </div>
         <div className="stats">
           <div><strong>6 / 6</strong><span>Council approval</span></div>
-          <div><strong><small>PKR</small> 400,000</strong><span>Approximately raised through SolarPak</span></div>
+          <div><strong><small>PKR</small> 400,000</strong><span>Approximately raised by SolarPak overall</span></div>
           <div><strong>200</strong><span>Intended residents · not yet served</span></div>
         </div>
         <p className="implementation-note">A target village has been identified. Implementation is tentatively planned for mid-November 2026, subject to technical verification and contractor arrangements.</p>
@@ -118,14 +119,15 @@ export default function ProjectWater() {
 
       <section className="reflection page-width" id="reflection" aria-labelledby="reflection-title">
         <h2 className="chapter-eyebrow" id="reflection-title">What I learned</h2>
-        <p className="reflection-copy">I wanted to use solar energy in a different way to help more people.<br/><br/><span>I’m still waiting to see if that risk will pay off.</span></p>
-        <p className="reflection-learning">Learning to make the design was one challenge. Getting the council to back it was another. Now I want to see it work.</p>
+        <p className="reflection-copy">I thought this was worth exploring because it could help a whole village.<br/><br/><span>I’m still waiting to see if that risk will pay off.</span></p>
+        <p className="reflection-learning">I learned that making the design and getting people to back it are different challenges. My next responsibility is to oversee the engineers as we work toward building the pumping and filtration system.</p>
         <p className="signature">Ayaan Ahmed</p>
       </section>
 
       <section className="implementation-ending" id="implementation" aria-labelledby="implementation-title">
         <div className="page-width">
-          <h2 id="implementation-title">TO BE<br/>IMPLEMENTED<br/>MID NOVEMBER<br/>2026</h2>
+          <h2 id="implementation-title">PLANNED FOR<br/>MID NOVEMBER<br/>2026</h2>
+          <p className="implementation-target-note">Tentative implementation target</p>
         </div>
       </section>
     </main>

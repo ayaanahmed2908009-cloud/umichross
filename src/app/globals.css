@@ -141,6 +141,7 @@ h2 { font-size: clamp(46px, 5.5vw, 76px); line-height: 1.08; letter-spacing: -.0
 .signature { font-size: 18px; margin-top: 35px; color: #666; }
 .implementation-ending { min-height: 100svh; display: flex; align-items: center; padding-block: 120px 110px; background: #000; color: #fff; text-align: center; }
 .implementation-ending h2 { font-size: clamp(48px, 9.2vw, 136px); font-weight: 900; line-height: .98; letter-spacing: -.055em; }
+.implementation-target-note { margin-top: 32px; color: #aaa; font-size: 18px; }
 .closing-footer { background: #000; color: #fff; }
 .closing-footer .footer { border-color: #333; }
 .closing-footer .footer > div > p { color: #aaa; }
