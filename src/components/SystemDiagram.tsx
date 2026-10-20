@@ -3,11 +3,12 @@ import { useId } from 'react';
 export default function SystemDiagram({ progress, annotations = true }: { progress: number; annotations?: boolean }) {
  const uid = useId().replace(/:/g, '');
  const stage = Math.min(6, Math.floor(progress * 7));
- const fill = Math.max(0, Math.min(1, (progress - 5 / 7) * 7));
+ // Match the original script's visual fill formula (L102), not measured flow.
+ const fill = Math.max(.06, Math.min(1, (progress * 7 - 4.6) / 1.2));
  const active = (s: number) => stage === s ? 'diagram-active' : '';
  return <svg viewBox="0 0 760 580" role="img" aria-label={`Conceptual water system, stage ${stage + 1} of seven`} className="system-diagram">
- <defs><pattern id={uid} width="30" height="30" patternUnits="userSpaceOnUse"><path d="M30 0H0V30" fill="none" stroke="currentColor" strokeWidth=".35" opacity=".16" /></pattern><clipPath id={`${uid}tank`}><rect x="285" y="190" width="190" height="140" /></clipPath></defs>
- <rect width="760" height="580" fill={`url(#${uid})`} />
+ <defs><clipPath id={`${uid}tank`}><rect x="285" y="190" width="190" height="140" /></clipPath></defs>
+
  <g fill="none" stroke="currentColor" strokeWidth="1.5">
  <path d="M200 500H590M250 500V340H510V500M265 340V500M495 340V500" opacity=".45" />
  <path d="M280 330H480V185H280ZM270 340H490V330H270Z" />
@@ -16,7 +17,7 @@ export default function SystemDiagram({ progress, annotations = true }: { progre
  <g clipPath={`url(#${uid}tank)`}><rect x="285" y={326 - fill * 130} width="190" height={fill * 130 + 4} fill="currentColor" fillOpacity=".18" /><path d={`M285 ${326 - fill * 130}H475`} strokeWidth="2" /></g>
  <path d="M400 550V280H467" strokeWidth="8" opacity=".12" />
  <path d="M400 550V280H467" strokeWidth="1.5" />
- <g className={active(2)}><path d="M400 550V280H467" strokeWidth="3" pathLength="1" strokeDasharray=".035 .025" strokeDashoffset={-progress * 4} opacity={stage >= 2 ? .9 : .12} /></g>
+ <g className={active(2)}><path d="M400 550V280H467" strokeWidth="3" pathLength="1" strokeDasharray=".035 .025" strokeDashoffset={-progress * 4} opacity={stage >= 2 && fill < 1 ? .9 : 0} /></g>
  <g className={active(1)}><rect x="386" y="510" width="28" height="40" fill="var(--diagram-bg)" /><path d="M391 520H409M391 527H409M391 534H409" /><rect x="305" y="375" width="45" height="52" fill="var(--diagram-bg)" /><path d="M328 427V458H400" strokeDasharray="4 4" /></g>
  <g className={active(3)}><path d="M390 390L410 410H390L410 390Z" fill="var(--diagram-bg)" /></g>
  <g className={active(4)}><rect x="389" y="442" width="22" height="40" fill="var(--diagram-bg)" /><path d="M392 451H408M392 460H408M392 469H408" /></g>
