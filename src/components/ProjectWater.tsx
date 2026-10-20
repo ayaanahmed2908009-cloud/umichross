@@ -46,7 +46,7 @@ export default function ProjectWater() {
           <p className="chapter-eyebrow">University of Michigan Ross · Admissions artifact</p>
           <h1 id="welcome-title">Hi, Admissions Officer.<br/>Here is my artifact.</h1>
           <p className="chapter-lead">I’m Ayaan Ahmed. This is Project Water.</p>
-          <p className="chapter-description">A story about an idea I explored, the skills I taught myself, and how I earned the support to take it forward.</p>
+          <p className="chapter-description">I taught myself 3D design, animated a proposed solar-powered pumping and filtration system, and earned unanimous approval from SolarPak’s six-member council.</p>
           <a className="scroll-cue" href="#introduction">Scroll to begin <ArrowDown size={20} aria-hidden="true"/></a>
         </div>
       </StoryChapter>
@@ -55,8 +55,8 @@ export default function ProjectWater() {
         <div className="chapter-copy">
           <p className="chapter-eyebrow">An independent idea. A shared commitment.</p>
           <h2 id="introduction-title">PROJECT<br/>WATER.</h2>
-          <p className="chapter-lead">Could solar energy help a rural community access water more reliably?</p>
-          <p className="chapter-description">Through SolarPak, I developed an original design, made an animation to explain it, and presented the idea to a six-member council. All six approved the proposal.</p>
+          <p className="chapter-lead">Could solar energy help a rural community access filtered water more reliably?</p>
+          <p className="chapter-description">Through SolarPak, I developed an original system to pump, filter and store water before it reaches community taps. I made an animation to explain the idea to a six-member council. All six approved the proposal.</p>
           <p className="chapter-status">An approved concept. Implementation is still planned.</p>
         </div>
       </StoryChapter>
@@ -68,8 +68,8 @@ export default function ProjectWater() {
             <h2 id="origin-title">It started with<br/>a question.</h2>
             <div className="chapter-prose">
               <p>Through my work with SolarPak, I saw how solar energy could help homes facing unreliable electricity. Access to water was another challenge in the communities we served.</p>
-              <p className="chapter-question">What if the same energy could help bring water to a community?</p>
-              <p>I began exploring a system that could pump water into a raised tank, then use gravity to carry it to taps.</p>
+              <p className="chapter-question">What if the same energy could help bring filtered water to a community?</p>
+              <p>I began exploring a system that could use solar energy to pump water through a filter into a raised tank, then use gravity to carry it to taps.</p>
             </div>
           </div>
           <OriginGallery photographs={originPhotographs}/>
@@ -81,35 +81,35 @@ export default function ProjectWater() {
           <div className="chapter-copy">
             <p className="chapter-eyebrow">The design</p>
             <h2 id="design-title">I learned<br/>by making.</h2>
-            <p className="chapter-lead">I had never designed in 3D before.</p>
+            <p className="chapter-lead">The idea is simple: use sunlight to pump and filter water, store it in a raised tank, then let gravity carry it to taps.</p>
             <div className="chapter-prose">
+              <p>I had never designed in 3D before.</p>
               <p>Over two weeks, I taught myself Autodesk Fusion 360, a tool for designing objects in 3D, and developed my original water-system concept.</p>
-              <p>The idea is simple: sunlight powers a pump, water collects in a raised tank, and gravity carries it to taps.</p>
             </div>
           </div>
           <figure className="chapter-design-image">
-            <Image src={animationAssets.cad} alt="My original 3D concept: solar panels above a water tank, with pipes leading to taps" width={1124} height={789} sizes="(max-width: 899px) 95vw, 50vw"/>
-            <figcaption>My original 3D design</figcaption>
+            <Image src={animationAssets.cad} alt="My original 3D concept: solar panels, a pump, an internal water filter, a raised tank and pipes leading to taps" width={1124} height={789} sizes="(max-width: 899px) 95vw, 50vw"/>
+            <figcaption>My original 3D design · includes an internal water filter</figcaption>
           </figure>
         </div>
       </StoryChapter>
 
       <section className="communication-section page-width" id="code" aria-labelledby="communication-title">
-        <p className="chapter-eyebrow">Communicating the idea</p>
-        <h2 id="communication-title">An idea needs<br/>to be understood.</h2>
+        <p className="chapter-eyebrow">The decision</p>
+        <h2 id="communication-title">Choosing where<br/>to invest.</h2>
         <div className="chapter-prose">
-          <p>A design alone wasn’t enough to earn support. I made an animation to explain the proposed system to SolarPak’s council.</p>
-          <p>My challenge was to help other people understand the idea well enough to decide whether it was worth pursuing.</p>
+          <p>I had to decide whether to continue funding installations as usual or invest in a different way to use solar energy to help more people.</p>
+          <p>I chose to explore Project Water: a proposed system that brings pumping and filtration together. I made an animation to help SolarPak’s council understand the idea and decide whether to support it.</p>
         </div>
       </section>
 
-      <section id="simulation" aria-label="The idea in three simple steps"><Simulation onSource={openSource}/></section>
+      <section id="simulation" aria-label="The idea in four simple steps"><Simulation onSource={openSource}/></section>
 
       <section className="outcome page-width" id="outcome" aria-labelledby="outcome-title">
         <p className="chapter-eyebrow">Earning support</p>
         <div className="outcome-intro">
           <h2 id="outcome-title">From concept<br/>to commitment.</h2>
-          <p>The council unanimously approved Project Water. What began as an independent exploration became a proposal the organisation believed was worth pursuing.</p>
+          <p>The council unanimously approved Project Water’s proposed solar-powered pumping and filtration system. What began as an independent exploration became a proposal the organisation believed was worth pursuing.</p>
         </div>
         <div className="stats">
           <div><strong>6 / 6</strong><span>Council approval</span></div>
@@ -121,7 +121,8 @@ export default function ProjectWater() {
 
       <section className="reflection page-width" id="reflection" aria-labelledby="reflection-title">
         <h2 className="chapter-eyebrow" id="reflection-title">What I learned</h2>
-        <blockquote>“What I am most proud of is not simply teaching myself CAD or developing an animation. It is taking something I initially explored independently and turning it into a proposal that six other people believed was worth pursuing.<br/><br/><span>I learned that designing a solution and earning the support needed to implement it are two different challenges.</span>”</blockquote>
+        <blockquote>“I chose to explore a different way to use solar energy to help more people.<br/><br/><span>I am still waiting to see whether that risk will pay off.</span>”</blockquote>
+        <p className="reflection-learning">I learned that designing a solution and earning the support needed to implement it are two different challenges. The council’s approval is a step forward; implementation and results are still ahead.</p>
         <p className="signature">Ayaan Ahmed</p>
       </section>
     </main>

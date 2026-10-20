@@ -8,15 +8,21 @@ export const systemStory = [
     start: 0,
   },
   {
+    label: 'Filter water',
+    title: 'Filter the water.',
+    explanation: 'Water passes through a filter before it enters the storage tank. Filtration is a core part of the proposed system, alongside reliable access to water.',
+    start: 4 / 7,
+  },
+  {
     label: 'Store water',
     title: 'Keep water in reserve.',
-    explanation: 'Water collects in a raised tank before it reaches the taps. The idea is to hold water before it is needed.',
+    explanation: 'After filtration, water collects in a raised tank. The idea is to keep filtered water in reserve before it is needed at the taps.',
     start: 5 / 7,
   },
   {
     label: 'Reach the taps',
     title: 'Let gravity do the rest.',
-    explanation: 'Water flows from the tank to the taps under gravity. The proposed system is intended for a target village of approximately 200 residents; it has not yet been installed.',
+    explanation: 'Stored, filtered water flows from the tank to the taps under gravity. The proposed system is intended for a target village of approximately 200 residents; it has not yet been installed.',
     start: 6 / 7,
   },
 ] as const;

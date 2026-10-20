@@ -6,5 +6,6 @@ export const animationAssets = {
  // Reserved for an actual geometry-based viewer; no pretend 3D rotation is shown.
  model: '/assets/cad/project-water.glb',
  cad: '/assets/cad/original-design.webp',
- duration: 42,
+ // The browser overview is shorter than the unchanged 42-second source script.
+ duration: 14,
 };

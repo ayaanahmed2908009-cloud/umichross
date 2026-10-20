@@ -6,7 +6,7 @@ export default function SystemDiagram({ progress, annotations = true }: { progre
  // Match the original script's visual fill formula (L102), not measured flow.
  const fill = Math.max(.06, Math.min(1, (progress * 7 - 4.6) / 1.2));
  const active = (s: number) => stage === s ? 'diagram-active' : '';
- return <svg viewBox="0 0 760 580" role="img" aria-label="Illustration of the proposed water system: solar panels, a pump, a storage tank and taps" className="system-diagram">
+ return <svg viewBox="0 0 760 580" role="img" aria-label="Illustration of the proposed water system: solar panels, a pump, a water filter, a storage tank and taps" className="system-diagram">
  <defs><clipPath id={`${uid}tank`}><rect x="285" y="190" width="190" height="140" /></clipPath></defs>
 
  <g fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -24,6 +24,10 @@ export default function SystemDiagram({ progress, annotations = true }: { progre
  <g className={active(5)}><path d="M448 210V270" /><rect x="441" y="220" width="14" height="14" fill={fill > .9 ? 'currentColor' : 'var(--diagram-bg)'} /></g>
  <g className={active(6)}><path d="M475 305H525V428H560V440" strokeWidth="3" /><path d="M545 420H568M554 414V426" /><path d="M557 450V475" strokeDasharray="3 5" strokeDashoffset={-progress * 100} opacity={stage === 6 ? 1 : .15} /><path d="M535 485H585" /></g>
  </g>
+ {!annotations && <g fill="currentColor" fontFamily="Arial, sans-serif" fontSize="22" opacity={stage === 4 ? 1 : .65}>
+   <path d="M389 464H280" fill="none" stroke="currentColor" strokeWidth="1"/>
+   <text x="265" y="471" textAnchor="end">Water filter</text>
+ </g>}
  {annotations && <g fill="currentColor" fontFamily="monospace" fontSize="10" letterSpacing="1"><g opacity={stage === 0 ? 1 : .45}><path d="M230 100H125" stroke="currentColor" strokeWidth=".7" /><text x="35" y="104">SOLAR ARRAY</text></g><g opacity={stage === 5 ? 1 : .45}><path d="M480 213H580" stroke="currentColor" strokeWidth=".7" /><text x="590" y="217">STORAGE</text></g><g opacity={stage === 1 ? 1 : .45}><path d="M305 400H160" stroke="currentColor" strokeWidth=".7" /><text x="45" y="404">CONTROLLER</text></g><g opacity={stage === 3 ? 1 : .45}><path d="M410 400H580" stroke="currentColor" strokeWidth=".7" /><text x="590" y="404">NON-RETURN</text><text x="590" y="418">VALVE</text></g><g opacity={stage === 4 ? 1 : .45}><path d="M389 464H160" stroke="currentColor" strokeWidth=".7" /><text x="45" y="468">FILTRATION*</text></g><text x="32" y="560" opacity=".4">CONCEPT SCHEMATIC / NOT TO SCALE</text></g>}
  </svg>;
 }

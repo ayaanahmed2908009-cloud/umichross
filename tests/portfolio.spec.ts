@@ -31,16 +31,19 @@ test('the opening is one scrolling story with larger text and a black introducti
   expect(errors).toEqual([]);
 });
 
-test('the business overview has three plain-language choices and working playback', async ({ page }) => {
+test('the business overview includes a filtration step and working playback', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto('/');
   const player = page.locator('.simulation-player');
   await player.scrollIntoViewIfNeeded();
-  await expect(page.getByRole('group', { name: 'Explore the idea' }).getByRole('button')).toHaveCount(3);
+  await expect(page.getByRole('group', { name: 'Explore the idea' }).getByRole('button')).toHaveCount(4);
   await expect(page.locator('.source-excerpt')).toHaveCount(0);
-  await expect(page.locator('.simulation-visual').getByRole('img')).toHaveAccessibleName('Illustration of the proposed water system: solar panels, a pump, a storage tank and taps');
+  await expect(page.locator('.simulation-visual').getByRole('img')).toHaveAccessibleName('Illustration of the proposed water system: solar panels, a pump, a water filter, a storage tank and taps');
   await expect(page.locator('.source-line')).toHaveCount(0);
   await expect(page.locator('.supporting-links')).not.toBeVisible();
+  await player.getByRole('button', { name: 'Filter water', exact: true }).click();
+  await expect(page.locator('.stage-copy h3')).toHaveText('Filter the water.');
+  await expect(player.getByRole('button', { name: 'Filter water', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await player.getByRole('button', { name: 'Store water', exact: true }).click();
   await expect(page.locator('.stage-copy h3')).toHaveText('Keep water in reserve.');
   await player.getByRole('button', { name: 'Reach the taps', exact: true }).click();
@@ -54,6 +57,9 @@ test('the business overview has three plain-language choices and working playbac
   const paused = await timeline.inputValue();
   await page.waitForTimeout(150);
   await expect(timeline).toHaveValue(paused);
+  await timeline.fill('0.65');
+  await expect(page.locator('.stage-copy h3')).toHaveText('Filter the water.');
+  await expect(timeline).toHaveAttribute('aria-valuetext', 'Filter water, 65% through the overview');
   await timeline.fill('0.8');
   await expect(page.locator('.stage-copy h3')).toHaveText('Keep water in reserve.');
   await expect(page.locator('#outcome')).toContainText('not yet served');
@@ -63,9 +69,11 @@ test('optional original source stays complete, mapped, searchable and downloadab
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   const original = await readFile(sourcePath, 'utf8');
   await page.goto('/');
+  await page.getByRole('button', { name: 'Filter water', exact: true }).click();
   await openSupportingSource(page);
   const modal = page.getByRole('dialog');
   await expect(modal).toBeVisible();
+  await expect(modal.locator('.editor-footer')).toContainText('Proposed filtration · L110–112, L64–68');
   await modal.getByRole('textbox', { name: 'Search Python source' }).fill('finally:');
   await expect(modal.locator('.search-match')).toContainText('finally:');
   await modal.getByRole('combobox', { name: 'Jump to animation stage source' }).selectOption('6');
@@ -91,6 +99,8 @@ test('mobile and reduced motion keep the full story scrollable and readable', as
     expect(await page.evaluate(() => location.pathname)).toBe('/');
   }
   expect(await page.locator('#origin .chapter-prose > p').first().evaluate(element => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(18);
+  await page.getByRole('button', { name: 'Filter water', exact: true }).click();
+  await expect(page.locator('.stage-copy h3')).toHaveText('Filter the water.');
   await page.getByRole('button', { name: 'Reach the taps', exact: true }).click();
   await expect(page.locator('.stage-copy h3')).toHaveText('Let gravity do the rest.');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

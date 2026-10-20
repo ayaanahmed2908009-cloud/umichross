@@ -49,7 +49,7 @@ export default function Simulation({ onSource }: { onSource: (stage: number) => 
   const [error, setError] = useState('');
   const player = useRef<HTMLDivElement>(null);
   const progressRef = useRef(0);
-  const phase = progress >= systemStory[2].start ? 2 : progress >= systemStory[1].start ? 1 : 0;
+  const phase = systemStory.reduce((currentIndex, step, index) => progress >= step.start ? index : currentIndex, 0);
   const current = systemStory[phase];
   const sourceStage = Math.min(6, Math.floor(progress * 7));
 
@@ -77,8 +77,8 @@ export default function Simulation({ onSource }: { onSource: (stage: number) => 
   return <div className="walkthrough">
     <div className="page-width overview-content">
       <div className="simulation-heading">
-        <h2>The idea, in three steps.</h2>
-        <p>Choose a step, or watch the overview.</p>
+        <h2>The idea, in four steps.</h2>
+        <p>A {Math.round(duration / speed)}-second overview. Choose a step to explore.</p>
       </div>
       <div className="simulation-player" ref={player}>
         <div className="simulation-layout">
@@ -98,7 +98,7 @@ export default function Simulation({ onSource }: { onSource: (stage: number) => 
           <button className="icon-button" aria-label="Restart overview" onClick={() => seek(0)}><RotateCcw size={18} aria-hidden="true"/></button>
         </div>
       </div>
-      <p className="simulation-footnote">{animationAssets.mode === 'conceptual' ? 'An illustration of the proposed system. Implementation is still planned.' : 'Original animation export.'}</p>
+      <p className="simulation-footnote">{animationAssets.mode === 'conceptual' ? 'An illustration of the proposed pumping, filtration, storage and delivery system. Implementation is still planned.' : 'Original animation export.'}</p>
       <details className="supporting-work">
         <summary>Supporting work <span>Optional</span></summary>
         <p>I wrote the original animation in Python, a programming language. You can explore the source or read my original project artifact here.</p>
