@@ -31,6 +31,33 @@ test('the opening is one scrolling story with larger text and a black introducti
   expect(errors).toEqual([]);
 });
 
+test('readers can explore both investment paths with keyboard or pointer and continue the story', async ({ page }) => {
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    const choice = page.getByRole('region', { name: 'What would you choose?' });
+    expect(await page.locator('#code').evaluate(element => element.nextElementSibling?.id)).toBe('investment-choice');
+    const installations = choice.getByRole('button', { name: 'Fund installations', exact: true });
+    const system = choice.getByRole('button', { name: 'Develop a new system', exact: true });
+    await expect(installations).toHaveAttribute('aria-pressed', 'false');
+    await expect(system).toHaveAttribute('aria-pressed', 'false');
+    await installations.focus();
+    await page.keyboard.press('Enter');
+    await expect(installations).toHaveAttribute('aria-pressed', 'true');
+    await expect(choice.locator('.investment-response')).toContainText('I chose to explore Project Water');
+    await system.click();
+    await expect(installations).toHaveAttribute('aria-pressed', 'false');
+    await expect(system).toHaveAttribute('aria-pressed', 'true');
+    await expect(choice.locator('.investment-response')).toContainText('That’s the path I chose.');
+    await choice.getByRole('link', { name: 'See the system I developed' }).click();
+    await expect(page.locator('.simulation-heading')).toBeInViewport();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.reload();
+    await expect(system).toHaveAttribute('aria-pressed', 'false');
+  }
+});
+
 test('the business overview includes a filtration step and working playback', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto('/');

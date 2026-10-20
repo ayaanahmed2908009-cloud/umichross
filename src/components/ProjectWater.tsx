@@ -8,6 +8,7 @@ import CodeViewer, { useOriginalSource } from './CodeViewer';
 import StoryChapter from './StoryChapter';
 import Simulation from './Simulation';
 import OriginGallery from './OriginGallery';
+import InvestmentChoice from './InvestmentChoice';
 import { originPhotographs } from '@/data/originPhotographs';
 import { animationAssets } from '@/lib/animationAssets';
 
@@ -102,6 +103,8 @@ export default function ProjectWater() {
           <p>I chose to explore Project Water: a proposed system that brings pumping and filtration together. I made an animation to help SolarPak’s council understand the idea and decide whether to support it.</p>
         </div>
       </section>
+
+      <InvestmentChoice/>
 
       <section id="simulation" aria-label="The idea in four simple steps"><Simulation onSource={openSource}/></section>
 

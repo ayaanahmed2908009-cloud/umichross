@@ -50,6 +50,8 @@ The story emphasizes both water access and filtration from the introduction thro
 
 Old `/introduction`, `/origin`, and `/design` links redirect to their matching homepage anchors. `/project` remains an alias for the complete story. Native links, document scrolling, and reduced-motion support work without page transitions. The optional source dialog provides keyboard focus containment, Escape dismissal, and focus restoration.
 
+Immediately after “Choosing where to invest,” `InvestmentChoice` invites readers to choose between funding installations and developing a new system. A minimal SVG road branches toward the two accessible buttons; selecting a path highlights its road and reveals a personal response and an optional link to the system overview. Readers can change their choice or continue scrolling without choosing. Selection is held only in component memory; it is not saved, submitted, or tracked.
+
 The artifact documents unanimous 6/6 council approval, approximately PKR 400,000 raised through SolarPak, and approximately 200 intended residents. Implementation is tentatively planned for mid-November 2026, subject to technical verification and contractor arrangements. Neither installation nor drinking-water safety is claimed. Original claims inside the unchanged source and PDF are evidence of the concept, not independently verified specifications.
 
 ## Validation
