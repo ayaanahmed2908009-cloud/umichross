@@ -7,6 +7,8 @@ import { gsap } from 'gsap';
 import CodeViewer, { useOriginalSource } from './CodeViewer';
 import StoryChapter from './StoryChapter';
 import Simulation from './Simulation';
+import OriginGallery from './OriginGallery';
+import { originPhotographs } from '@/data/originPhotographs';
 import { animationAssets } from '@/lib/animationAssets';
 
 export default function ProjectWater() {
@@ -59,15 +61,18 @@ export default function ProjectWater() {
         </div>
       </StoryChapter>
 
-      <StoryChapter id="origin">
-        <div className="chapter-copy">
-          <p className="chapter-eyebrow">The origin story</p>
-          <h2 id="origin-title">It started with<br/>a question.</h2>
-          <div className="chapter-prose">
-            <p>Through my work with SolarPak, I saw how solar energy could help homes facing unreliable electricity. Access to water was another challenge in the communities we served.</p>
-            <p className="chapter-question">What if the same energy could help bring water to a community?</p>
-            <p>I began exploring a system that could pump water into a raised tank, then use gravity to carry it to taps.</p>
+      <StoryChapter id="origin" className="origin-section">
+        <div className={originPhotographs.length === 3 ? 'origin-layout' : undefined}>
+          <div className="chapter-copy">
+            <p className="chapter-eyebrow">The origin story</p>
+            <h2 id="origin-title">It started with<br/>a question.</h2>
+            <div className="chapter-prose">
+              <p>Through my work with SolarPak, I saw how solar energy could help homes facing unreliable electricity. Access to water was another challenge in the communities we served.</p>
+              <p className="chapter-question">What if the same energy could help bring water to a community?</p>
+              <p>I began exploring a system that could pump water into a raised tank, then use gravity to carry it to taps.</p>
+            </div>
           </div>
+          <OriginGallery photographs={originPhotographs}/>
         </div>
       </StoryChapter>
 
