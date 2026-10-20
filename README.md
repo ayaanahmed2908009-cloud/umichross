@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Production: `npm run build`, then `npm start`. Import the repository into Vercel with its default Next.js settings to deploy. Stop production servers before rebuilding so they do not serve stale bundles.
+Production: `npm run build`, then `npm start`. On Railway, connect this repository’s `main` branch, build with `npm run build`, and start with `npm start`; Next.js reads Railway’s injected `PORT` and the start script binds to `0.0.0.0`. Deploy the latest source commit after changes and verify the deployed commit in Railway. Importing into Vercel with its default Next.js settings also works. Stop local production servers before rebuilding so they do not serve stale bundles.
 
 ## Original Python source
 
@@ -42,7 +42,17 @@ The PDF contains screenshots, not 3D geometry. The optional `animationAssets.mod
 
 ## Presentation and accessibility
 
-The main page uses one CAD image and one unified animation player. Desktop scrolling and player controls share one progress value. Mobile, short viewports, and reduced-motion settings use explicit stage navigation without a long pinned section. Source excerpts and advanced playback controls can be collapsed; the full source lives in a separate native dialog with keyboard focus containment, Escape dismissal, and focus restoration.
+The entry point is a guided admissions story with a clear next step on each page:
+
+- `/`: a white welcome page addressed to the admissions officer.
+- `/introduction`: a black introduction explaining Project Water and its approval status.
+- `/origin`: the question that led to the concept, written without engineering jargon.
+- `/design`: the original CAD image, a plain-language explanation, and optional engineering details.
+- `/project#code`: continuation into the animation, approval, and reflection.
+
+Every opening page has a “Full project” shortcut to `/project`, which retains the complete exhibit and source viewer. The guided pages are static server-rendered pages with ordinary links, keyboard access, browser Back support, and no forced animations.
+
+The complete exhibit uses one CAD image and one unified animation player. Desktop scrolling and player controls share one progress value. Mobile, short viewports, and reduced-motion settings use explicit stage navigation without a long pinned section. Source excerpts and advanced playback controls can be collapsed; the full source lives in a separate native dialog with keyboard focus containment, Escape dismissal, and focus restoration.
 
 The artifact documents unanimous 6/6 council approval, approximately PKR 400,000 raised through SolarPak, and approximately 200 intended residents. Implementation is tentatively planned for mid-November 2026, subject to technical verification and contractor arrangements. Neither installation nor drinking-water safety is claimed. Original claims inside the unchanged source and PDF are evidence of the concept, not independently verified specifications.
 
@@ -55,4 +65,4 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-An existing system Chromium can be used with `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:e2e`. The suite starts its own fresh production server on port 3100 and checks reverse scrolling, stage-to-source mapping, playback, mobile/reduced-motion layouts, exact source copy/download, search, and large-file virtualization. Python is syntax-checked without importing or executing Autodesk APIs; original Fusion 360 execution and video/3D playback require their corresponding software/assets.
+An existing system Chromium can be used with `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:e2e`. The suite starts its own fresh production server on port 3100 and checks the guided desktop/mobile story and skip-ahead path, reverse scrolling, stage-to-source mapping, playback, mobile/reduced-motion layouts, exact source copy/download, search, and large-file virtualization. Python is syntax-checked without importing or executing Autodesk APIs; original Fusion 360 execution and video/3D playback require their corresponding software/assets.

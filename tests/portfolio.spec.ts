@@ -7,7 +7,7 @@ test('one walkthrough supports stages, mapped source, playback and reverse scrol
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto('/');
+  await page.goto('/project');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('PROJECTWATER.');
   await expect(page.locator('.simulation-player')).toHaveCount(1);
   const walkthrough = page.locator('.walkthrough');
@@ -45,7 +45,7 @@ test('one walkthrough supports stages, mapped source, playback and reverse scrol
 test('original source is complete, downloadable, searchable and mapped to real lines', async ({ page, context }) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   const original = await readFile(sourcePath, 'utf8');
-  await page.goto('/');
+  await page.goto('/project');
   await page.getByRole('button', { name: 'Explore the code', exact: true }).first().click();
   const modal = page.getByRole('dialog');
   await expect(modal).toBeVisible();
@@ -67,7 +67,7 @@ test('original source is complete, downloadable, searchable and mapped to real l
 test('mobile and reduced motion use short, explicit stages and optional code', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.goto('/');
+  await page.goto('/project');
   await page.getByRole('button', { name: 'Open navigation' }).click();
   await page.getByRole('navigation').getByRole('link', { name: 'The system', exact: true }).click();
   await expect(page.locator('.stage-copy h3')).toHaveText('Solar energy');
@@ -88,7 +88,7 @@ test('large sources remain fully searchable without rendering every line', async
   // Intercepted test fixture only; never published as original source.
   const fixture = Array.from({ length: 2000 }, (_, i) => `# Test fixture line ${i + 1}`).join('\n');
   await page.route('**/assets/python/SolarPak_Flow_Animation.py', route => route.fulfill({ status: 200, contentType: 'text/plain', body: fixture }));
-  await page.goto('/');
+  await page.goto('/project');
   await page.getByRole('button', { name: 'Explore the code', exact: true }).first().click();
   const modal = page.getByRole('dialog');
   await modal.getByRole('textbox', { name: 'Search Python source' }).fill('fixture line 1999');
@@ -98,3 +98,45 @@ test('large sources remain fully searchable without rendering every line', async
   await expect(modal.locator('.source-line').last()).toContainText('2000');
   expect(await modal.locator('.source-line').count()).toBeLessThan(100);
 });
+
+for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+  test(`admissions story has a clear four-page sequence at ${viewport.width}px`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Hi, Admissions Officer.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Here is my artifact.');
+    expect(await page.locator('.guided-page').evaluate(element => getComputedStyle(element).backgroundColor)).toBe('rgb(255, 255, 255)');
+
+    const begin = page.getByRole('link', { name: 'Begin', exact: true });
+    await begin.focus();
+    await page.keyboard.press('Enter');
+    await expect(page).toHaveURL(/\/introduction$/);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('PROJECTWATER.');
+    expect(await page.locator('.guided-page').evaluate(element => getComputedStyle(element).backgroundColor)).toBe('rgb(10, 10, 10)');
+    await expect(page.getByText('An approved concept. Implementation is still planned.')).toBeVisible();
+
+    await page.getByRole('link', { name: 'Next: The origin story' }).click();
+    await expect(page).toHaveURL(/\/origin$/);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('It started with');
+    await expect(page.getByText('What if the same energy could help bring water to a community?')).toBeVisible();
+    await page.getByRole('link', { name: 'Next: The design' }).click();
+    await expect(page).toHaveURL(/\/design$/);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('used CAD before.');
+    await expect(page.getByRole('img', { name: /My original Fusion 360 concept/ })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+
+    await page.getByRole('link', { name: 'Back', exact: true }).click();
+    await expect(page).toHaveURL(/\/origin$/);
+    await page.goBack();
+    await expect(page).toHaveURL(/\/design$/);
+    await page.getByRole('link', { name: 'Next: Bringing it to life' }).click();
+    await expect(page).toHaveURL(/\/project#code$/);
+    await expect(page.getByRole('heading', { name: 'Making the idea visible.' })).toBeInViewport();
+
+    await page.goto('/');
+    await page.getByRole('link', { name: 'Full project', exact: true }).click();
+    await expect(page).toHaveURL(/\/project$/);
+    await expect(page.locator('.simulation-player')).toHaveCount(1);
+  });
+}

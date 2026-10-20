@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowDown, ArrowUp, ArrowUpRight, Menu, X } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -41,7 +42,7 @@ export default function ProjectWater() {
     <div ref={root}>
       <a className="skip-link" href="#main">Skip to content</a>
       <header className="navigation">
-        <a className="brand" href="#overview">PROJECT WATER</a>
+        <Link className="brand" href="/" aria-label="Project Water welcome">PROJECT WATER</Link>
         <nav id="main-navigation" aria-label="Main navigation" className={menu ? 'nav-links is-open' : 'nav-links'}>
           {links.map(([label, href]) => <a key={href} href={href} onClick={() => setMenu(false)}>{label}</a>)}
         </nav>
