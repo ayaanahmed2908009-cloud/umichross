@@ -38,6 +38,7 @@ test('the business overview has three plain-language choices and working playbac
   await player.scrollIntoViewIfNeeded();
   await expect(page.getByRole('group', { name: 'Explore the idea' }).getByRole('button')).toHaveCount(3);
   await expect(page.locator('.source-excerpt')).toHaveCount(0);
+  await expect(page.locator('.simulation-visual').getByRole('img')).toHaveAccessibleName('Illustration of the proposed water system: solar panels, a pump, a storage tank and taps');
   await expect(page.locator('.source-line')).toHaveCount(0);
   await expect(page.locator('.supporting-links')).not.toBeVisible();
   await player.getByRole('button', { name: 'Store water', exact: true }).click();

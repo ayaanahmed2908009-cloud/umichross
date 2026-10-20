@@ -94,7 +94,7 @@ export default function Simulation({ onSource }: { onSource: (stage: number) => 
         </div>
         <div className="player-controls">
           <button className="play-button" aria-label={playing ? 'Pause overview' : 'Play overview'} onClick={() => { if (progress >= 1) { progressRef.current = 0; setProgress(0); } setPlaying(!playing); }}>{playing ? <Pause size={17} aria-hidden="true"/> : <Play size={17} aria-hidden="true"/>}<span>{playing ? 'Pause' : 'Watch the overview'}</span></button>
-          <input type="range" aria-label="Overview timeline" min="0" max="1" step="0.001" value={progress} onChange={e => seek(Number(e.target.value))}/>
+          <input type="range" aria-label="Overview timeline" aria-valuetext={`${current.label}, ${Math.round(progress * 100)}% through the overview`} min="0" max="1" step="0.001" value={progress} onChange={e => seek(Number(e.target.value))}/>
           <button className="icon-button" aria-label="Restart overview" onClick={() => seek(0)}><RotateCcw size={18} aria-hidden="true"/></button>
         </div>
       </div>

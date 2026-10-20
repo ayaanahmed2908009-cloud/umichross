@@ -6,7 +6,7 @@ export default function SystemDiagram({ progress, annotations = true }: { progre
  // Match the original script's visual fill formula (L102), not measured flow.
  const fill = Math.max(.06, Math.min(1, (progress * 7 - 4.6) / 1.2));
  const active = (s: number) => stage === s ? 'diagram-active' : '';
- return <svg viewBox="0 0 760 580" role="img" aria-label={`Conceptual water system, stage ${stage + 1} of seven`} className="system-diagram">
+ return <svg viewBox="0 0 760 580" role="img" aria-label="Illustration of the proposed water system: solar panels, a pump, a storage tank and taps" className="system-diagram">
  <defs><clipPath id={`${uid}tank`}><rect x="285" y="190" width="190" height="140" /></clipPath></defs>
 
  <g fill="none" stroke="currentColor" strokeWidth="1.5">
