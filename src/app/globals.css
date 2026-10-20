@@ -119,10 +119,15 @@ h2 { font-size: clamp(46px, 5.5vw, 76px); line-height: 1.08; letter-spacing: -.0
 .stats > div > span { font-size: 18px; line-height: 1.5; color: #666; }
 .implementation-note { color: #666; font-size: 18px; margin-top: 30px; max-width: 850px; }
 .reflection { padding-block: 130px; }
-.reflection blockquote { max-width: 960px; font-size: 37px; line-height: 1.45; letter-spacing: -.025em; }
-.reflection blockquote > span { color: #666; }
+.reflection-copy { max-width: 960px; font-size: 37px; line-height: 1.45; letter-spacing: -.025em; }
+.reflection-copy > span { color: #666; }
 .reflection-learning { max-width: 800px; color: #666; font-size: 22px; margin-top: 35px; }
 .signature { font-size: 18px; margin-top: 35px; color: #666; }
+.implementation-ending { min-height: 100svh; display: flex; align-items: center; padding-block: 120px 110px; background: #000; color: #fff; text-align: center; }
+.implementation-ending h2 { font-size: clamp(48px, 9.2vw, 136px); font-weight: 900; line-height: .98; letter-spacing: -.055em; }
+.closing-footer { background: #000; color: #fff; }
+.closing-footer .footer { border-color: #333; }
+.closing-footer .footer > div > p { color: #aaa; }
 .footer { display: flex; align-items: center; gap: 40px; padding-block: 35px; border-top: 1px solid var(--line); }
 .footer > div { flex: 1; }
 .footer > div > span { font-size: 16px; }
@@ -245,7 +250,9 @@ h2 { font-size: clamp(46px, 5.5vw, 76px); line-height: 1.08; letter-spacing: -.0
   .stats > div > span { font-size: 18px; }
   .implementation-note { font-size: 17px; }
   .reflection { padding-block: 85px; }
-  .reflection blockquote { font-size: 28px; }
+  .reflection-copy { font-size: 28px; }
+  .implementation-ending { padding-block: 110px 85px; }
+  .implementation-ending h2 { font-size: clamp(32px, 10.5vw, 64px); line-height: 1.02; }
   .signature { font-size: 18px; }
   .footer { flex-wrap: wrap; gap: 22px; padding-block: 30px; }
   .footer > div { flex-basis: 100%; }

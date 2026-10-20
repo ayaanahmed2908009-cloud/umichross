@@ -42,7 +42,7 @@ The PDF contains screenshots, not 3D geometry. The optional `animationAssets.mod
 
 ## Presentation and accessibility
 
-The homepage is one continuous, naturally scrolling admissions story: a white welcome, black introduction, origin, design, communication, a simple system overview, approval, and reflection. The opening chapters have no page gates or required Next buttons. Large headings and 18–22px main body text make the story readable on mobile and desktop.
+The homepage is one continuous, naturally scrolling admissions story: a white welcome, black introduction, origin, design, communication, a simple system overview, approval, and reflection. The reflection uses conversational first-person paragraphs without quotation marks. A full-height black closing section reads “TO BE IMPLEMENTED MID NOVEMBER 2026” in large, bold white capitals, with the footer continuing the black background. The opening chapters have no page gates or required Next buttons. Large headings and 18–22px main body text make the story readable on mobile and desktop.
 
 The origin section includes three real, openly licensed context photographs from Pakistan in a responsive rounded gallery. Original JPEGs are hosted locally in `public/assets/images/pakistan/`; their full framing is preserved and CSS displays them in grayscale. `src/data/originPhotographs.ts` records accessible descriptions, dates, creators, and source/license links. The gallery's “Sources & photo credits” disclosure and `public/assets/images/pakistan/CREDITS.md` provide attribution. These historical photographs are context, not evidence of Project Water or its target village.
 

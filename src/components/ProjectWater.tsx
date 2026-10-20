@@ -121,17 +121,25 @@ export default function ProjectWater() {
 
       <section className="reflection page-width" id="reflection" aria-labelledby="reflection-title">
         <h2 className="chapter-eyebrow" id="reflection-title">What I learned</h2>
-        <blockquote>“I chose to explore a different way to use solar energy to help more people.<br/><br/><span>I am still waiting to see whether that risk will pay off.</span>”</blockquote>
-        <p className="reflection-learning">I learned that designing a solution and earning the support needed to implement it are two different challenges. The council’s approval is a step forward; implementation and results are still ahead.</p>
+        <p className="reflection-copy">I wanted to use solar energy in a different way to help more people.<br/><br/><span>I’m still waiting to see if that risk will pay off.</span></p>
+        <p className="reflection-learning">Learning to make the design was one challenge. Getting the council to back it was another. Now I want to see it work.</p>
         <p className="signature">Ayaan Ahmed</p>
+      </section>
+
+      <section className="implementation-ending" id="implementation" aria-labelledby="implementation-title">
+        <div className="page-width">
+          <h2 id="implementation-title">TO BE<br/>IMPLEMENTED<br/>MID NOVEMBER<br/>2026</h2>
+        </div>
       </section>
     </main>
 
-    <footer className="footer page-width">
-      <div><span>PROJECT WATER</span><p>Design. Communicate. Implement.</p></div>
-      <a href="/assets/pdf/project-water.pdf" target="_blank" rel="noreferrer">Original artifact <ArrowUpRight size={18} aria-hidden="true"/></a>
-      <a className="icon-button" href="#welcome" aria-label="Back to top"><ArrowUp size={21} aria-hidden="true"/></a>
-    </footer>
+    <div className="closing-footer">
+      <footer className="footer page-width">
+        <div><span>PROJECT WATER</span><p>Design. Communicate. Implement.</p></div>
+        <a href="/assets/pdf/project-water.pdf" target="_blank" rel="noreferrer">Original artifact <ArrowUpRight size={18} aria-hidden="true"/></a>
+        <a className="icon-button" href="#welcome" aria-label="Back to top"><ArrowUp size={21} aria-hidden="true"/></a>
+      </footer>
+    </div>
     <dialog aria-label="Explore original Python source" ref={dialog} className="source-dialog" onClose={() => setSourceOpen(false)} onClick={e => { if (e.target === dialog.current) dialog.current.close(); }}>
       {sourceOpen && <CodeViewer source={source} stage={sourceStage} full onClose={() => dialog.current?.close()}/>}
     </dialog>
