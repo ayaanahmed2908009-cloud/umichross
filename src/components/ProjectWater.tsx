@@ -2,130 +2,132 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowDown, ArrowUp, ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowDown, ArrowUp, ArrowUpRight } from 'lucide-react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CodeViewer, { useOriginalSource } from './CodeViewer';
+import StoryChapter from './StoryChapter';
 import Simulation from './Simulation';
 import { animationAssets } from '@/lib/animationAssets';
-
-const links = [['The idea', '#story'], ['The system', '#simulation'], ['The outcome', '#outcome']];
 
 export default function ProjectWater() {
   const root = useRef<HTMLDivElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
-  const [menu, setMenu] = useState(false);
   const [sourceOpen, setSourceOpen] = useState(false);
   const [sourceStage, setSourceStage] = useState(0);
   const source = useOriginalSource();
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    const mm = gsap.matchMedia();
     const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap.from('.hero-copy > *', { y: 18, opacity: 0, duration: .85, stagger: .1, ease: 'power2.out' });
-        gsap.from('.hero-model', { opacity: 0, duration: 1, delay: .2 });
+        gsap.from('.welcome-copy > *', { y: 16, opacity: 0, duration: .7, stagger: .08, ease: 'power2.out' });
       });
     }, root);
-    return () => ctx.revert();
+    return () => { mm.revert(); ctx.revert(); };
   }, []);
 
   const openSource = (stage = 0) => {
-    setSourceStage(stage);
-    setSourceOpen(true);
-    dialog.current?.showModal();
+    setSourceStage(stage); setSourceOpen(true); dialog.current?.showModal();
   };
 
-  return (
-    <div ref={root}>
-      <a className="skip-link" href="#main">Skip to content</a>
-      <header className="navigation">
-        <Link className="brand" href="/" aria-label="Project Water welcome">PROJECT WATER</Link>
-        <nav id="main-navigation" aria-label="Main navigation" className={menu ? 'nav-links is-open' : 'nav-links'}>
-          {links.map(([label, href]) => <a key={href} href={href} onClick={() => setMenu(false)}>{label}</a>)}
-        </nav>
-        <button className="menu-toggle icon-button" aria-controls="main-navigation" aria-expanded={menu} aria-label={menu ? 'Close navigation' : 'Open navigation'} onClick={() => setMenu(!menu)}>{menu ? <X size={21}/> : <Menu size={21}/>}</button>
-      </header>
-
-      <main id="main">
-        <section className="hero page-width" id="overview">
-          <div className="hero-copy">
-            <p className="eyebrow">Ayaan Ahmed / SolarPak</p>
-            <h1>PROJECT<br/>WATER.</h1>
-            <p className="hero-deck">An independent idea.<br/>A shared commitment.</p>
-            <p className="hero-description">Exploring solar-powered water access<br className="desktop-break"/> in rural Sindh, Pakistan.</p>
-            <a className="text-link hero-link" href="#story">Discover the project <ArrowDown size={15}/></a>
-          </div>
-          <figure className="hero-model">
-            <Image src={animationAssets.cad} alt="Ayaan Ahmed’s original Fusion 360 CAD concept: a solar array above an elevated tank, with piping, filtration and gravity-fed taps" width={1124} height={789} priority sizes="(max-width: 760px) 95vw, 55vw"/>
-            <figcaption>Original design · Autodesk Fusion 360</figcaption>
-          </figure>
-        </section>
-
-        <div className="story page-width" id="story">
-          <section className="story-row" id="problem">
-            <h2>One question.</h2>
-            <div className="story-copy">
-              <p>Through SolarPak, I had seen how decentralised solar energy could help homes with unreliable electricity. I wanted to explore what it could do for another challenge: access to water.</p>
-              <p className="story-question">What if the same energy model could power water access?</p>
-            </div>
-          </section>
-          <section className="story-row" id="design">
-            <h2>Learning<br/>by making.</h2>
-            <div className="story-copy">
-              <p>I had never used CAD before. In two weeks, I taught myself Autodesk Fusion 360 and developed an original concept: solar panels, a pump, proposed filtration, elevated storage, and taps.</p>
-              <details className="quiet-details">
-                <summary>A closer look at the design</summary>
-                <p>The proposed system uses solar power to lift water to storage, then gravity to feed the taps. A non-return valve is intended to prevent backflow; a float switch is intended to stop the pump when the tank is full.</p>
-                <p>Panel sizing, storage capacity, filtration performance, and contractor specifications remain subject to technical verification.</p>
-                <a className="text-link" href="/assets/pdf/project-water.pdf" target="_blank" rel="noreferrer">Original project artifact <ArrowUpRight size={14}/></a>
-              </details>
-            </div>
-          </section>
-          <section className="story-row code-story" id="code">
-            <h2>Making the<br/>idea visible.</h2>
-            <div className="story-copy">
-              <p>To explain the system, I wrote a Python animation using Fusion 360’s API. It walked SolarPak’s six-member council through the concept, one stage at a time.</p>
-              <button className="text-link" onClick={() => openSource()}>Explore the code <ArrowUpRight size={14}/></button>
-            </div>
-          </section>
+  return <div ref={root} className="scrolling-story">
+    <a className="skip-link" href="#main">Skip to content</a>
+    <header className="story-navigation">
+      <div className="page-width">
+        <a className="story-author" href="#welcome">Ayaan Ahmed</a>
+        <nav aria-label="Story navigation"><a href="#origin">Story</a><a href="#design">Design</a><a href="#outcome">Outcome</a></nav>
+      </div>
+    </header>
+    <main id="main">
+      <StoryChapter id="welcome" className="welcome-section">
+        <div className="chapter-copy welcome-copy">
+          <p className="chapter-eyebrow">University of Michigan Ross · Admissions artifact</p>
+          <h1 id="welcome-title">Hi, Admissions Officer.<br/>Here is my artifact.</h1>
+          <p className="chapter-lead">I’m Ayaan Ahmed. This is Project Water.</p>
+          <p className="chapter-description">A story about an idea I explored, the skills I taught myself, and how I earned the support to take it forward.</p>
+          <a className="scroll-cue" href="#introduction">Scroll to begin <ArrowDown size={20} aria-hidden="true"/></a>
         </div>
+      </StoryChapter>
 
-        <section id="simulation" aria-label="Interactive system walkthrough">
-          <Simulation source={source} onSource={openSource}/>
-        </section>
+      <StoryChapter id="introduction" dark className="introduction-section">
+        <div className="chapter-copy">
+          <p className="chapter-eyebrow">An independent idea. A shared commitment.</p>
+          <h2 id="introduction-title">PROJECT<br/>WATER.</h2>
+          <p className="chapter-lead">Could solar energy help a rural community access water more reliably?</p>
+          <p className="chapter-description">Through SolarPak, I developed an original design, made an animation to explain it, and presented the idea to a six-member council. All six approved the proposal.</p>
+          <p className="chapter-status">An approved concept. Implementation is still planned.</p>
+        </div>
+      </StoryChapter>
 
-        <section className="outcome page-width" id="outcome">
-          <div className="story-row outcome-intro">
-            <h2>From concept<br/>to commitment.</h2>
-            <div className="story-copy"><p>The council unanimously approved Project Water. What began as an independent exploration became a proposal the organisation believed was worth pursuing.</p></div>
+      <StoryChapter id="origin">
+        <div className="chapter-copy">
+          <p className="chapter-eyebrow">The origin story</p>
+          <h2 id="origin-title">It started with<br/>a question.</h2>
+          <div className="chapter-prose">
+            <p>Through my work with SolarPak, I saw how solar energy could help homes facing unreliable electricity. Access to water was another challenge in the communities we served.</p>
+            <p className="chapter-question">What if the same energy could help bring water to a community?</p>
+            <p>I began exploring a system that could pump water into a raised tank, then use gravity to carry it to taps.</p>
           </div>
-          <div className="stats">
-            <div><strong>6 / 6</strong><span>Council approval</span></div>
-            <div><strong><small>PKR</small> 400,000</strong><span>Approximately raised through SolarPak</span></div>
-            <div><strong>200</strong><span>Intended residents · not yet served</span></div>
+        </div>
+      </StoryChapter>
+
+      <StoryChapter id="design" className="design-section">
+        <div className="chapter-design-layout">
+          <div className="chapter-copy">
+            <p className="chapter-eyebrow">The design</p>
+            <h2 id="design-title">I learned<br/>by making.</h2>
+            <p className="chapter-lead">I had never designed in 3D before.</p>
+            <div className="chapter-prose">
+              <p>Over two weeks, I taught myself Autodesk Fusion 360, a tool for designing objects in 3D, and developed my original water-system concept.</p>
+              <p>The idea is simple: sunlight powers a pump, water collects in a raised tank, and gravity carries it to taps.</p>
+            </div>
           </div>
-          <p className="implementation-note">A target village has been identified. Implementation is tentatively planned for mid-November 2026, subject to technical verification and contractor arrangements.</p>
-        </section>
+          <figure className="chapter-design-image">
+            <Image src={animationAssets.cad} alt="My original 3D concept: solar panels above a water tank, with pipes leading to taps" width={1124} height={789} sizes="(max-width: 899px) 95vw, 50vw"/>
+            <figcaption>My original 3D design</figcaption>
+          </figure>
+        </div>
+      </StoryChapter>
 
-        <section className="reflection page-width" id="reflection">
-          <p className="eyebrow">What I learned</p>
-          <blockquote>“What I am most proud of is not simply teaching myself CAD or developing an animation. It is taking something I initially explored independently and turning it into a proposal that six other people believed was worth pursuing.<br/><br/><span>I learned that designing a solution and earning the support needed to implement it are two different challenges.</span>”</blockquote>
-          <p className="signature">Ayaan Ahmed</p>
-        </section>
-      </main>
+      <section className="communication-section page-width" id="code" aria-labelledby="communication-title">
+        <p className="chapter-eyebrow">Communicating the idea</p>
+        <h2 id="communication-title">An idea needs<br/>to be understood.</h2>
+        <div className="chapter-prose">
+          <p>A design alone wasn’t enough to earn support. I made an animation to explain the proposed system to SolarPak’s council.</p>
+          <p>My challenge was to help other people understand the idea well enough to decide whether it was worth pursuing.</p>
+        </div>
+      </section>
 
-      <footer className="footer page-width">
-        <div><span>PROJECT WATER</span><p>Design. Communicate. Implement.</p></div>
-        <a href="/assets/pdf/project-water.pdf" target="_blank" rel="noreferrer">Original artifact <ArrowUpRight size={14}/></a>
-        <a className="icon-button" href="#overview" aria-label="Back to top"><ArrowUp size={19}/></a>
-      </footer>
+      <section id="simulation" aria-label="The idea in three simple steps"><Simulation onSource={openSource}/></section>
 
-      <dialog aria-label="Explore original Python source" ref={dialog} className="source-dialog" onClose={() => setSourceOpen(false)} onClick={e => { if(e.target === dialog.current) dialog.current.close(); }}>
-        {sourceOpen && <CodeViewer source={source} stage={sourceStage} full onClose={() => dialog.current?.close()}/>}
-      </dialog>
-    </div>
-  );
+      <section className="outcome page-width" id="outcome" aria-labelledby="outcome-title">
+        <p className="chapter-eyebrow">Earning support</p>
+        <div className="outcome-intro">
+          <h2 id="outcome-title">From concept<br/>to commitment.</h2>
+          <p>The council unanimously approved Project Water. What began as an independent exploration became a proposal the organisation believed was worth pursuing.</p>
+        </div>
+        <div className="stats">
+          <div><strong>6 / 6</strong><span>Council approval</span></div>
+          <div><strong><small>PKR</small> 400,000</strong><span>Approximately raised through SolarPak</span></div>
+          <div><strong>200</strong><span>Intended residents · not yet served</span></div>
+        </div>
+        <p className="implementation-note">A target village has been identified. Implementation is tentatively planned for mid-November 2026, subject to technical verification and contractor arrangements.</p>
+      </section>
+
+      <section className="reflection page-width" id="reflection" aria-labelledby="reflection-title">
+        <h2 className="chapter-eyebrow" id="reflection-title">What I learned</h2>
+        <blockquote>“What I am most proud of is not simply teaching myself CAD or developing an animation. It is taking something I initially explored independently and turning it into a proposal that six other people believed was worth pursuing.<br/><br/><span>I learned that designing a solution and earning the support needed to implement it are two different challenges.</span>”</blockquote>
+        <p className="signature">Ayaan Ahmed</p>
+      </section>
+    </main>
+
+    <footer className="footer page-width">
+      <div><span>PROJECT WATER</span><p>Design. Communicate. Implement.</p></div>
+      <a href="/assets/pdf/project-water.pdf" target="_blank" rel="noreferrer">Original artifact <ArrowUpRight size={18} aria-hidden="true"/></a>
+      <a className="icon-button" href="#welcome" aria-label="Back to top"><ArrowUp size={21} aria-hidden="true"/></a>
+    </footer>
+    <dialog aria-label="Explore original Python source" ref={dialog} className="source-dialog" onClose={() => setSourceOpen(false)} onClick={e => { if (e.target === dialog.current) dialog.current.close(); }}>
+      {sourceOpen && <CodeViewer source={source} stage={sourceStage} full onClose={() => dialog.current?.close()}/>}
+    </dialog>
+  </div>;
 }

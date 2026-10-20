@@ -25,7 +25,7 @@ The script uses `adsk.core` and `adsk.fusion` and runs **inside Autodesk Fusion 
 
 `src/data/animationStages.ts` contains verified **1-based, inclusive** ranges from the supplied file. Each stage has a short displayed excerpt and multiple highlighted ranges covering the relevant visual logic and path/body setup. The complete viewer can jump to any stage. Recheck all mappings when replacing or editing the Python file.
 
-The original script uses a 42-second timeline divided into seven six-second stages. The browser diagram follows the same conceptual sequence and visual tank-fill formula, with all state derived from normalized progress. It is clearly labeled as a separate browser visualization. Highlighted Python functions depict energy, water, and geometry; they are not hardware control software or verified engineering performance.
+The original script uses a 42-second timeline divided into seven six-second stages. The browser diagram follows the same internal sequence and visual tank-fill formula, with all state derived from normalized progress. The main story groups these into three everyday concepts; original source inspection is optional. It is clearly labeled as a separate browser visualization. Highlighted Python functions depict energy, water, and geometry; they are not hardware control software or verified engineering performance.
 
 ## Original video and CAD assets
 
@@ -42,17 +42,11 @@ The PDF contains screenshots, not 3D geometry. The optional `animationAssets.mod
 
 ## Presentation and accessibility
 
-The entry point is a guided admissions story with a clear next step on each page:
+The homepage is one continuous, naturally scrolling admissions story: a white welcome, black introduction, origin, design, communication, a simple system overview, approval, and reflection. The opening chapters have no page gates or required Next buttons. Large headings and 18–22px main body text make the story readable on mobile and desktop.
 
-- `/`: a white welcome page addressed to the admissions officer.
-- `/introduction`: a black introduction explaining Project Water and its approval status.
-- `/origin`: the question that led to the concept, written without engineering jargon.
-- `/design`: the original CAD image, a plain-language explanation, and optional engineering details.
-- `/project#code`: continuation into the animation, approval, and reflection.
+The system overview has three plain-language choices: use sunlight, store water, and reach the taps. It focuses on the idea and how the animation helped communicate a proposal. Original seven-stage diagram state is preserved underneath; `src/data/systemStory.ts` defines the three presentation groups. There are no source excerpts, function names, line numbers, or engineering controls in the main presentation. The complete source remains available through the collapsed “Supporting work” section, with its verified seven-stage mappings intact. Playback is user-controlled; no section forces a long pinned scroll.
 
-Every opening page has a “Full project” shortcut to `/project`, which retains the complete exhibit and source viewer. The guided pages are static server-rendered pages with ordinary links, keyboard access, browser Back support, and no forced animations.
-
-The complete exhibit uses one CAD image and one unified animation player. Desktop scrolling and player controls share one progress value. Mobile, short viewports, and reduced-motion settings use explicit stage navigation without a long pinned section. Source excerpts and advanced playback controls can be collapsed; the full source lives in a separate native dialog with keyboard focus containment, Escape dismissal, and focus restoration.
+Old `/introduction`, `/origin`, and `/design` links redirect to their matching homepage anchors. `/project` remains an alias for the complete story. Native links, document scrolling, and reduced-motion support work without page transitions. The optional source dialog provides keyboard focus containment, Escape dismissal, and focus restoration.
 
 The artifact documents unanimous 6/6 council approval, approximately PKR 400,000 raised through SolarPak, and approximately 200 intended residents. Implementation is tentatively planned for mid-November 2026, subject to technical verification and contractor arrangements. Neither installation nor drinking-water safety is claimed. Original claims inside the unchanged source and PDF are evidence of the concept, not independently verified specifications.
 
@@ -65,4 +59,4 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-An existing system Chromium can be used with `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:e2e`. The suite starts its own fresh production server on port 3100 and checks the guided desktop/mobile story and skip-ahead path, reverse scrolling, stage-to-source mapping, playback, mobile/reduced-motion layouts, exact source copy/download, search, and large-file virtualization. Python is syntax-checked without importing or executing Autodesk APIs; original Fusion 360 execution and video/3D playback require their corresponding software/assets.
+An existing system Chromium can be used with `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run test:e2e`. The suite starts its own fresh production server on port 3100 and checks the continuous desktop/mobile story, legacy chapter links, three-step overview and playback, optional stage-to-source mapping, reduced motion, exact source copy/download, search, and large-file virtualization. Python is syntax-checked without importing or executing Autodesk APIs; original Fusion 360 execution and video/3D playback require their corresponding software/assets.
