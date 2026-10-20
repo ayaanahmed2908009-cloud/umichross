@@ -2,7 +2,7 @@
 
 :root { --ink: #171717; --muted: #666; --line: #e5e5e5; --diagram-bg: #f7f7f7; }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+html { scroll-behavior: smooth; }
 body { margin: 0; background: #fff; color: var(--ink); font-family: Arial, 'Helvetica Neue', sans-serif; -webkit-font-smoothing: antialiased; }
 button, input, select { font: inherit; }
 button { cursor: pointer; color: inherit; background: none; border: 0; }
@@ -21,11 +21,6 @@ img { display: block; height: auto; max-width: 100%; }
 .skip-link { position: fixed; top: -100px; left: 20px; z-index: 80; background: #111; color: #fff; padding: 14px; }
 .skip-link:focus { top: 12px; }
 /* Native document scrolling: no page gates, scroll snapping, or pinned chapters. */
-.story-navigation { position: fixed; top: 0; left: 0; right: 0; z-index: 30; color: #fff; mix-blend-mode: difference; }
-.story-navigation > div { height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.story-author { font-size: 16px; white-space: nowrap; }
-.story-navigation nav { display: flex; gap: 28px; align-items: center; font-size: 16px; }
-.story-navigation a { display: inline-flex; min-height: 44px; align-items: center; }
 .story-chapter { min-height: 100svh; display: flex; align-items: center; background: #fff; color: #171717; }
 .chapter-content { padding-block: 135px 110px; }
 .chapter-copy { max-width: 850px; }
@@ -212,11 +207,7 @@ h2 { font-size: clamp(46px, 5.5vw, 76px); line-height: 1.08; letter-spacing: -.0
   .stats > div > span { font-size: 18px; }
 }
 @media (max-width: 600px) {
-  html { scroll-padding-top: 70px; }
   .page-width { width: calc(100% - 44px); }
-  .story-navigation > div { height: 66px; gap: 16px; }
-  .story-author { font-size: 14px; }
-  .story-navigation nav { gap: 14px; font-size: 14px; }
   .chapter-content { padding-block: 110px 80px; }
   .chapter-eyebrow { font-size: 14px; margin-bottom: 28px; }
   .chapter-copy h1 { font-size: clamp(40px, 11vw, 62px); line-height: 1.08; }

@@ -21,9 +21,9 @@ test('the opening is one scrolling story with larger text and a black introducti
   await expect(page).toHaveURL(/\/#introduction$/);
   await expect(page.locator('#introduction-title')).toBeInViewport();
   expect(await page.locator('#introduction').evaluate(element => getComputedStyle(element).backgroundColor)).toBe('rgb(10, 10, 10)');
-  await page.getByRole('navigation', { name: 'Story navigation' }).getByRole('link', { name: 'Story', exact: true }).click();
+  await page.locator('#origin-title').scrollIntoViewIfNeeded();
   await expect(page.locator('#origin-title')).toBeInViewport();
-  await page.getByRole('navigation').getByRole('link', { name: 'Design', exact: true }).click();
+  await page.locator('#design-title').scrollIntoViewIfNeeded();
   await expect(page.locator('#design-title')).toBeInViewport();
   await expect(page.getByRole('img', { name: /My original 3D concept/ })).toBeVisible();
   expect(await page.evaluate(() => location.pathname)).toBe('/');

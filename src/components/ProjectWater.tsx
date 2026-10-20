@@ -35,12 +35,6 @@ export default function ProjectWater() {
 
   return <div ref={root} className="scrolling-story">
     <a className="skip-link" href="#main">Skip to content</a>
-    <header className="story-navigation">
-      <div className="page-width">
-        <a className="story-author" href="#welcome">Ayaan Ahmed</a>
-        <nav aria-label="Story navigation"><a href="#origin">Story</a><a href="#design">Design</a><a href="#outcome">Outcome</a></nav>
-      </div>
-    </header>
     <main id="main">
       <StoryChapter id="welcome" className="welcome-section">
         <div className="chapter-copy welcome-copy">
